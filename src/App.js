@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-
+import Header from './components/Header';
+import TrendingBlogs from './components/TrendingBlogs';
+import Features from './components/Features';
+import AboutUs from './components/AboutUs';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Register from './components/Register';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 function App() {
+  // State to track which component should be visible
+  const [activeSection, setActiveSection] = useState('home');
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Header component for navigation */}
+      <Header setActiveSection={setActiveSection} />
+
+      {/* Main content area with conditional rendering */}
+      <div className="main-content">
+        {activeSection === 'home' && (
+          <>
+            <TrendingBlogs />
+            <Features />
+            <AboutUs />
+          </>
+        )}
+        {activeSection === 'login' && <Login />}
+        {activeSection === 'register' && <Register />}
+      </div>
+
+      {/* Footer component */}
+      <Footer />
     </div>
   );
 }
-
 export default App;
